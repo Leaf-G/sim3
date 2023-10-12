@@ -23,8 +23,11 @@ int main(int argc, char** argv) {
 
     ComputeSim3<double> computeSim3(0.01);
 
-    std::string strTraj_1 = "./data/frame_trajectory.txt";
-    std::string strTraj_2 = "./data/lidar-trajectory.txt";
+    std::string strTraj_1 = "./data/target.txt";
+    std::string strTraj_2 = "./data/wait.txt";
+
+//    std::string strTraj_1 = "./data/frame_trajectory.txt";
+//    std::string strTraj_2 = "./data/lidar-trajectory.txt";
     std::string savedTrajFile = "./";
 
     computeSim3.LoadTraj(strTraj_1, strTraj_2);
@@ -34,6 +37,7 @@ int main(int argc, char** argv) {
     computeSim3.SyncTraj(syncedTraj_1, syncedTraj_2);
 
     Eigen::Matrix4d sim3 = computeSim3.GetSim3();
+    std::cout << "sim3相似矩阵" << std::endl << sim3 << std::endl;
 
     std::vector<Eigen::Vector3d> points_1;
     std::vector<Eigen::Vector3d> points_2;

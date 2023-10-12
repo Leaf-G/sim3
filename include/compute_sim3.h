@@ -174,19 +174,28 @@ void ComputeSim3<Type>::SyncTraj(_tTraj &syncedTraj_1, _tTraj &syncedTraj_2) {
                 if (std::abs(_vTraj_1[j].timestamp - _vTraj_2[i].timestamp) <= _syncThreshold){
                     _vSyncedTraj_1.push_back(_vTraj_1[j]);
                     _vSyncedTraj_2.push_back(_vTraj_2[i]);
+                    std::cout << "i：" << i << "j:" << j << std::endl;
+                    std::cout << "时间戳1：" << std::fixed << _vTraj_1[j].timestamp << "时间戳2:" << _vTraj_2[i].timestamp << std::endl;
+                    std::cout << "时间戳差值" << std::abs(_vTraj_1[j].timestamp - _vTraj_2[i].timestamp) << std::endl;
                     currentFirst++;
+                    std::cout << "匹配轨迹数：" << currentFirst << std::endl;
                     break;
                 }
             }
         }
+
     } else{// size_1 <= size_2
         for (int i = 0; i < size_1; ++i) {
             for (int j = currentFirst; j < size_2; ++j) {
+                std::cout << "i：" << i << "j:" << j << std::endl;
+                std::cout << "时间戳1：" << std::fixed << _vTraj_1[j].timestamp << "时间戳2:" << _vTraj_2[i].timestamp << std::endl;
+                std::cout << "时间戳差值" << std::abs(_vTraj_1[j].timestamp - _vTraj_2[i].timestamp) << std::endl;
+                std::cout << "匹配轨迹数：" << currentFirst << std::endl;
                 if (std::abs(_vTraj_1[i].timestamp - _vTraj_2[j].timestamp) > _syncThreshold &&
                     _vTraj_2[j].timestamp > _vTraj_1[i].timestamp){
                     break;
                 }
-
+                std::cout << "匹配轨迹数：" << currentFirst << std::endl;
                 if (std::abs(_vTraj_1[i].timestamp - _vTraj_2[j].timestamp) <= _syncThreshold){
                     _vSyncedTraj_1.push_back(_vTraj_1[i]);
                     _vSyncedTraj_2.push_back(_vTraj_2[j]);
